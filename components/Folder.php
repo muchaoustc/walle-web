@@ -145,7 +145,7 @@ class Folder extends Ansible {
 
         $releasePackage = Project::getReleaseVersionPackage($version);
 
-        $scpCommand = sprintf('scp -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o CheckHostIP=false -P %d %s %s@%s:%s',
+        $scpCommand = sprintf('scp -i /home/ec2-user/walle.pem -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o CheckHostIP=false -P %d %s %s@%s:%s',
             $this->getHostPort($remoteHost),
             $packagePath,
             escapeshellarg($this->getConfig()->release_user),

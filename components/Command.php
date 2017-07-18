@@ -98,7 +98,7 @@ class Command
 
         foreach (GlobalHelper::str2arr($this->getConfig()->hosts) as $remoteHost) {
 
-            $localCommand = sprintf('ssh %s -p %d -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o CheckHostIP=false %s@%s %s',
+            $localCommand = sprintf('ssh -i /home/ec2-user/walle.pem %s -p %d -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o CheckHostIP=false %s@%s %s',
                 $needTTY, $this->getHostPort($remoteHost), escapeshellarg($this->getConfig()->release_user),
                 escapeshellarg($this->getHostName($remoteHost)), escapeshellarg($command));
 

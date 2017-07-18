@@ -1,4 +1,7 @@
 <?php
+ini_set("display_errors", 1);
+ini_set('date.timezone','Asia/Shanghai');
+
 // Include local configuration first so we can set the YII_* constants there
 $local = require(__DIR__.'/../config/local.php');
 
