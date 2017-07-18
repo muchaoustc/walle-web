@@ -27,7 +27,7 @@ class Git extends Command {
         if (file_exists($dotGit)) {
             $cmd[] = sprintf('cd %s ', $gitDir);
             $cmd[] = sprintf('/usr/bin/env git checkout -q %s', $branch);
-            $cmd[] = sprintf('/usr/bin/env git fetch -p -q --all');
+            $cmd[] = sprintf('/usr/bin/env git fetch -p -q --all --tags');
             $cmd[] = sprintf('/usr/bin/env git reset -q --hard origin/%s', $branch);
             $command = join(' && ', $cmd);
             return $this->runLocalCommand($command);
@@ -144,7 +144,7 @@ class Git extends Command {
         $this->updateRepo();
         $destination = Project::getDeployFromDir();
         $cmd[] = sprintf('cd %s ', $destination);
-        $cmd[] = '/usr/bin/env git tag -l ';
+        $cmd[] = '/usr/bin/env git tag -ln ';
         $command = join(' && ', $cmd);
         $result = $this->runLocalCommand($command);
         if (!$result) {
@@ -154,9 +154,16 @@ class Git extends Command {
         $history = [];
         $list = explode(PHP_EOL, $this->getExeLog());
         foreach ($list as $item) {
+            $content = explode(" ", $item);
+	    if(isset($content[0])){
+                $id = trim($content[0]);
+            }
+	    if(isset($content[count($content)-1])){
+                $msg = trim($content[count($content)-1]);
+            }
             $history[] = [
-                'id'      => $item,
-                'message' => $item,
+                'id'      => trim($id),
+                'message' => trim($msg),
             ];
         }
         return $history;
