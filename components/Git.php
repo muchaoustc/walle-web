@@ -157,8 +157,8 @@ class Git extends Command {
         $history = [];
         $list    = explode(PHP_EOL, $this->getExeLog());
 
-        $list    = array_reverse($list);
-        $list    = array_slice($list, 0, 10);
+        $list = array_reverse($list);
+        $list = array_slice($list, 0, 10);
         foreach ($list as $item) {
             $content = explode(" ", $item);
             if (isset($content[0])) {
