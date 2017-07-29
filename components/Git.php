@@ -160,11 +160,11 @@ class Git extends Command {
         $list    = array_slice($list, 0, 10);
         foreach ($list as $item) {
             $content = explode(" ", $item);
-	    if(isset($content[0])){
+            if (isset($content[0])) {
                 $id = trim($content[0]);
             }
-	    if(isset($content[count($content)-1])){
-                $msg = trim($content[count($content)-1]);
+            if (isset($content[count($content) - 1])) {
+                $msg = trim($content[count($content) - 1]);
             }
             $history[] = [
                 'id'      => trim($id),
