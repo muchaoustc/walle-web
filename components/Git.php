@@ -147,7 +147,8 @@ class Git extends Command {
         $this->updateRepo();
         $destination = Project::getDeployFromDir();
         $cmd[]       = sprintf('cd %s ', $destination);
-        $cmd[]       = '/usr/bin/env git tag -ln --sort=-taggerdate';
+        // $cmd[]       = '/usr/bin/env git tag -ln --sort=-taggerdate'; // 低版本不支持
+        $cmd[]       = '/usr/bin/env git tag -ln';
         $command     = join(' && ', $cmd);
         $result      = $this->runLocalCommand($command);
         if (!$result) {
