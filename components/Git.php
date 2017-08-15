@@ -149,6 +149,7 @@ class Git extends Command {
         $cmd[]       = sprintf('cd %s ', $destination);
         // $cmd[]       = '/usr/bin/env git tag -ln --sort=-taggerdate'; // 低版本不支持
         $cmd[]       = '/usr/bin/env git tag|xargs git tag -d {}'; // 先清空一下本地的tag列表
+        $cmd[]       = '/usr/bin/env git pull'; // 再拉取一次tag列表
         $command     = join(' ; ', $cmd);
         $result      = $this->runLocalCommand($command);
         array_pop($cmd);
