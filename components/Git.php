@@ -153,6 +153,7 @@ class Git extends Command {
         $command     = join(' ; ', $cmd);
         $result      = $this->runLocalCommand($command);
         array_pop($cmd);
+        array_pop($cmd);
         $cmd[]       = '/usr/bin/env git tag -ln';
         $command     = join(' && ', $cmd);
         $result      = $this->runLocalCommand($command);
