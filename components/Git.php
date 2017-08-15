@@ -148,6 +148,7 @@ class Git extends Command {
         $destination = Project::getDeployFromDir();
         $cmd[]       = sprintf('cd %s ', $destination);
         // $cmd[]       = '/usr/bin/env git tag -ln --sort=-taggerdate'; // 低版本不支持
+        $cmd[]       = '/usr/bin/env git tag|xargs git tag -d {}'; // 先清空一下本地的tag列表
         $cmd[]       = '/usr/bin/env git tag -ln';
         $command     = join(' && ', $cmd);
         $result      = $this->runLocalCommand($command);
